@@ -46,4 +46,6 @@ export const lightColors = {
   statusBar: 'dark' as const,
 };
 
-export type ThemeColors = typeof darkColors;
+export type ThemeColors = Omit<typeof darkColors, 'statusBar'> & {
+  statusBar: 'light' | 'dark';
+};
