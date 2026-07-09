@@ -1,7 +1,17 @@
 import axios, { type InternalAxiosRequestConfig } from 'axios';
 import { getToken, setToken, removeToken } from '@/lib/secureStorage';
 
-const BASE_URL = 'http://185.233.44.234';
+const BASE_URL =
+  process.env.EXPO_PUBLIC_API_URL ??
+  process.env.VITE_API_URL ??
+  process.env.REACT_APP_API_URL ??
+  '';
+
+if (!BASE_URL) {
+  console.warn(
+    '[api] Missing EXPO_PUBLIC_API_URL (or VITE_API_URL / REACT_APP_API_URL). Set it in .env'
+  );
+}
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
